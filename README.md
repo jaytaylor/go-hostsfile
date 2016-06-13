@@ -1,6 +1,8 @@
 # Hostsfile
 
-![Documentation](https://godoc.org/github.com/jaytaylor/go-hostsfile?status.svg) ![Build Status](https://travis-ci.org/jaytaylor/go-hostsfile.svg) ![Report Card](https://goreportcard.com/badge/jaytaylor/go-hostsfile)
+[![Documentation](https://godoc.org/github.com/jaytaylor/go-hostsfile?status.svg)](https://godoc.org/github.com/jaytaylor/go-hostsfile)
+[![Build Status](https://travis-ci.org/jaytaylor/go-hostsfile.svg)](https://travis-ci.org/jaytaylor/go-hostsfile)
+[![Report Card](https://goreportcard.com/badge/jaytaylor/go-hostsfile)](https://goreportcard.com/report/jaytaylor/go-hostsfile)
 
 ### The /etc/hosts parsing and resolver library for golang
 
