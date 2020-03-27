@@ -18,7 +18,7 @@ works in cases where the IP mapping exists in the hostsfile.
 
 ## Get it
 
-    go get -u https://github.com/jaytaylor/go-hostsfile
+    go get -u github.com/jaytaylor/go-hostsfile
 
 ## Usage
 
