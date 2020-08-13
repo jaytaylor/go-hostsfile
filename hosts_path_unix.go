@@ -1,4 +1,4 @@
-// +build linux darwin
+// +build linux darwin freebsd netbsd openbsd
 
 package hostsfile
 
