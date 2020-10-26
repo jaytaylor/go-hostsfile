@@ -1,4 +1,4 @@
-// +build linux darwin freebsd netbsd openbsd
+// +build !plan9 !windows
 
 package hostsfile
 
