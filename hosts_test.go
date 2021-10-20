@@ -3,11 +3,11 @@ package hostsfile_test
 import (
 	"testing"
 
-	"github.com/jaytaylor/go-hostsfile"
+	h "../go-hostsfile"
 )
 
 func TestHostsReverseLookup(t *testing.T) {
-	res, err := hostsfile.ReverseLookup("127.0.0.1")
+	res, err := h.ReverseLookup("127.0.0.1")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -79,10 +79,34 @@ fe80::1%lo0	localhost
 				"192.168.1.240",
 			},
 		},
+		{
+			hostsFileContent: `;;
+; Host Database
+;
+; localhost is used to configure the loopback interface
+; when the system is booting.  Do not change this entry.
+;;
+127.0.0.1	localhost localhost.local       localhost.localdomain jays-computer jays-computer.local jays-computer.localdomain
+255.255.255.255	broadcasthost
+::1             localhost
+fe80::1%lo0	localhost
+
+	192.168.1.34 hello-app.lan talksbythebay-lan # example.com
+	192.168.1.32 hello-app.lan talksbythebay-lan #example.com
+	# 192.168.1.240 should-not.resolve really-it-should.nt`,
+			expectedEntries: map[string]int{
+				"127.0.0.1":    6,
+				"192.168.1.34": 2,
+				"192.168.1.32": 2,
+			},
+			forbiddenEntries: []string{
+				"192.168.1.240",
+			},
+		},
 	}
 
 	for i, testCase := range testCases {
-		res, err := hostsfile.ParseHosts([]byte(testCase.hostsFileContent), nil)
+		res, err := h.ParseHosts([]byte(testCase.hostsFileContent), nil)
 		if err != nil {
 			t.Fatalf("[i=%v] Error parsing hosts content: %s", i, err)
 		}
