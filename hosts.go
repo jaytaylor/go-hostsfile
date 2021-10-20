@@ -20,6 +20,8 @@ func ParseHosts(hostsFileContent []byte, err error) (map[string][]string, error)
 		return nil, err
 	}
 	hostsMap := map[string][]string{}
+
+LINE:
 	for _, line := range strings.Split(strings.Trim(string(hostsFileContent), " \t\r\n"), "\n") {
 		line = strings.Replace(strings.Trim(line, " \t"), "\t", " ", -1)
 		if len(line) == 0 || line[0] == ';' || line[0] == '#' {
@@ -28,13 +30,15 @@ func ParseHosts(hostsFileContent []byte, err error) (map[string][]string, error)
 		pieces := strings.SplitN(line, " ", 2)
 		if len(pieces) > 1 && len(pieces[0]) > 0 {
 			if names := strings.Fields(pieces[1]); len(names) > 0 {
-				if _, ok := hostsMap[pieces[0]]; ok {
-					hostsMap[pieces[0]] = append(hostsMap[pieces[0]], names...)
-				} else {
-					hostsMap[pieces[0]] = names
+				for _, name := range names {
+					if strings.HasPrefix(name, "#") {
+						continue LINE
+					}
+					hostsMap[pieces[0]] = append(hostsMap[pieces[0]], name)
 				}
 			}
 		}
+
 	}
 	return hostsMap, nil
 }
