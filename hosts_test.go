@@ -1,13 +1,11 @@
-package hostsfile_test
+package hostsfile
 
 import (
 	"testing"
-
-	h "../go-hostsfile"
 )
 
 func TestHostsReverseLookup(t *testing.T) {
-	res, err := h.ReverseLookup("127.0.0.1")
+	res, err := ReverseLookup("127.0.0.1")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -106,7 +104,7 @@ fe80::1%lo0	localhost
 	}
 
 	for i, testCase := range testCases {
-		res, err := h.ParseHosts([]byte(testCase.hostsFileContent), nil)
+		res, err := ParseHosts([]byte(testCase.hostsFileContent), nil)
 		if err != nil {
 			t.Fatalf("[i=%v] Error parsing hosts content: %s", i, err)
 		}
